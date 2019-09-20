@@ -20,6 +20,11 @@ var renderCloud = function(ctx, x, y, color) {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
+var renderBar = function(ctx, x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, BAR_HEIGHT, BAR_WIDTH);
+};
+
 var getMaxElement = function(arr) {
   var maxElement = arr[0];
 
@@ -31,6 +36,19 @@ var getMaxElement = function(arr) {
 
   return maxElement;
 };
+
+var getRandom = function randomInteger(min, max) {
+      let rand = min + Math.random() * (max + 1 - min);
+      return Math.floor(rand);
+    }
+
+var getColor = function(name) {
+if (name === 'Вы') {
+      return 'rgba(255, 0, 0, 1)';
+    }
+
+return 'hsl(255,' + getRandom(1, 99) + '%' + ', 30%)';
+}
 
 window.renderStatistics = function(ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
@@ -45,20 +63,8 @@ window.renderStatistics = function(ctx, players, times) {
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < players.length; i++) {
-    var getRandom = function randomInteger(min, max) {
-      let rand = min + Math.random() * (max + 1 - min);
-      return Math.floor(rand);
-    }
-
-    var randomColor = Math.random();
-
-    if (players[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.fillStyle = 'hsl(' + getRandom(1, 300) + ', 50%' + ', 30%)';
-    }
-
-    ctx.fillRect(BAR_X + (BAR_WIDTH + BAR_GAP) * i, BAR_Y, BAR_WIDTH, -((BAR_HEIGHT * Math.round(times[i])) / Math.round(maxTime)));
+    ctx.fillStyle = getColor(players[i]);
+    ctx.fillRect = renderBar();
     ctx.fillStyle = '#000';
     ctx.fillText(players[i], TEXT_X + (BAR_WIDTH + BAR_GAP) * i, TEXT_Y);
   }
