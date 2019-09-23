@@ -22,7 +22,7 @@ var renderCloud = function(ctx, x, y, color) {
 
 var renderBar = function(ctx, x, y, color) {
   ctx.fillStyle = color;
-  ctx.fillRect(ctx, x, y, BAR_WIDTH, BAR_HEIGHT);
+  ctx.fillRect(x, y, BAR_HEIGHT, BAR_WIDTH);
 };
 
 var renderText = function(ctx, x, y, color) {
@@ -71,7 +71,7 @@ window.renderStatistics = function(ctx, players, times) {
     ctx.fillStyle = getColor(players[i]);
     renderBar(ctx, BAR_X + (BAR_WIDTH + BAR_GAP) * i, BAR_Y, BAR_WIDTH, -((BAR_HEIGHT * Math.round(times[i])) / Math.round(maxTime)));
     ctx.fillStyle = '#000';
-    // renderText(ctx, TEXT_X + (BAR_WIDTH + BAR_GAP) * i, TEXT_Y);
+    // renderText(ctx, TEXT_X + (BAR_WIDTH + BAR_GAP) * i, TEXT_Y, '#000');
     ctx.fillText(players[i], TEXT_X + (BAR_WIDTH + BAR_GAP) * i, TEXT_Y);
   }
 };
