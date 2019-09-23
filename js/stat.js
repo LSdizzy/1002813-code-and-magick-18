@@ -10,27 +10,25 @@ var BAR_X = 130;
 var BAR_Y = 240;
 var GAP = 10;
 var BAR_GAP = 50;
-var FONT_GAP = 15;
-var TEXT_WIDTH = 50;
 var BAR_HEIGHT = 150;
 var BAR_WIDTH = 40;
 
-var renderCloud = function(ctx, x, y, color) {
+var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var renderBar = function(ctx, x, y, color) {
+var renderBar = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, BAR_HEIGHT, BAR_WIDTH);
 };
 
-var renderText = function(ctx, x, y, color) {
+var renderText = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(ctx, x, y, color);
-}
+};
 
-var getMaxElement = function(arr) {
+var getMaxElement = function (arr) {
   var maxElement = arr[0];
 
   for (var i = 0; i < arr.length; i++) {
@@ -42,20 +40,20 @@ var getMaxElement = function(arr) {
   return maxElement;
 };
 
-var getColor = function(name) {
-if (name === 'Вы') {
-      return 'rgba(255, 0, 0, 1)';
-    }
+var getColor = function (name) {
+  if (name === 'Вы') {
+    return 'rgba(255, 0, 0, 1)';
+  }
 
-return 'hsl(255,' + getRandom(1, 99) + '%' + ', 30%)';
-}
+  return 'hsl(255,' + getRandom(1, 99) + '%' + ', 30%)';
+};
 
 var getRandom = function randomInteger(min, max) {
-      let rand = min + Math.random() * (max + 1 - min);
-      return Math.floor(rand);
-    }
+  var rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+};
 
-window.renderStatistics = function(ctx, players, times) {
+window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
@@ -71,7 +69,7 @@ window.renderStatistics = function(ctx, players, times) {
     ctx.fillStyle = getColor(players[i]);
     renderBar(ctx, BAR_X + (BAR_WIDTH + BAR_GAP) * i, BAR_Y, BAR_WIDTH, -((BAR_HEIGHT * Math.round(times[i])) / Math.round(maxTime)));
     ctx.fillStyle = '#000';
-    // renderText(ctx, TEXT_X + (BAR_WIDTH + BAR_GAP) * i, TEXT_Y, '#000');
+    renderText(ctx, TEXT_X + (BAR_WIDTH + BAR_GAP) * i, TEXT_Y, '#000');
     ctx.fillText(players[i], TEXT_X + (BAR_WIDTH + BAR_GAP) * i, TEXT_Y);
   }
 };
